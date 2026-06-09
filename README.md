@@ -25,10 +25,16 @@ $ pip install -r requirements.txt
 $ python main.py
 ```
 
+You can also create a `.env` file with the api key.
+
+```env
+STEAMGRIDDB_API_KEY=your_key_here
+```
+
 ## Notes
 
 Get a SteamGridDB API key from SteamGridDB for artwork.
 
 https://www.steamgriddb.com/
 
-It's very easy, you can just log in with steam, and then find the api key in the preferences. 
+It's very easy, you can just log in with steam, and then find the api key in the preferences.

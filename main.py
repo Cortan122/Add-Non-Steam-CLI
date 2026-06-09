@@ -7,6 +7,10 @@ import vdf
 import zlib
 import platform
 
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -154,13 +158,16 @@ class NonSteamGameAdder:
         game_path = os.path.dirname(exe_path)
 
         # Fetch images from SteamGridDB
-        search_url = f'https://www.steamgriddb.com/api/v2/search/autocomplete/{game_name}'
-        response = requests.get(search_url, headers={'Authorization': f'Bearer {self.steamgriddb_api_key}'})
-        if response.status_code == 200:
-            data = response.json()
-            if data['success']:
-                game_id = data['data'][0]['id']  # Assuming first result is the best match
-                self.save_images_to_grid(app_id, game_id, user_id)
+        if self.steamgriddb_api_key != None:
+            search_url = f'https://www.steamgriddb.com/api/v2/search/autocomplete/{game_name}'
+            response = requests.get(search_url, headers={'Authorization': f'Bearer {self.steamgriddb_api_key}'})
+            if response.status_code == 200:
+                data = response.json()
+                if data['success']:
+                    game_id = data['data'][0]['id']  # Assuming first result is the best match
+                    self.save_images_to_grid(app_id, game_id, user_id)
+            else:
+                logger.error(f"Failed to get a response from SteamGridDB...")
 
         # Update Steam shortcut (VDF file)
         shortcuts_file = os.path.join(steam_user_data_path, user_id, 'config', 'shortcuts.vdf')
@@ -261,7 +268,9 @@ def main():
             return
 
         # Specify the SteamGridDB API key
-        steamgriddb_api_key = input("Specify a SteamGridDB API key or press Enter to skip.\n> ").strip()
+        steamgriddb_api_key = os.environ.get("STEAMGRIDDB_API_KEY", None)
+        if steamgriddb_api_key == None:
+            steamgriddb_api_key = input("Specify a SteamGridDB API key or press Enter to skip.\n> ").strip()
 
         # Add the non-Steam game using NonSteamGameAdder class
         game_adder = NonSteamGameAdder(steamgriddb_api_key)
