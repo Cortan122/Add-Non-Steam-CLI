@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 import requests
 import logging
@@ -7,6 +9,7 @@ import vdf
 import zlib
 import platform
 
+import sys
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -252,7 +255,11 @@ def main():
     """Main function to add a non-Steam game."""
     try:
         # Collect game details
-        game_exe_path = input("Enter the path to your game\n> ").strip()
+        if len(sys.argv) > 1:
+            game_exe_path = sys.argv[1]
+        else:
+            game_exe_path = input("Enter the path to your game\n> ").strip()
+
         game_name = input("Enter the name of the game\n> ").strip()
         launch_options = input("Enter any launch options or press Enter to skip\n> ").strip()
 
