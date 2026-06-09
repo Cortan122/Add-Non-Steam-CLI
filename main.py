@@ -221,6 +221,11 @@ def select_steam_user():
         logger.error("No Steam users found.")
         return None
 
+    if len(usernames) == 1:
+        selected_user_id = list(usernames.keys())[0]
+        logger.info(f"Selected user: {usernames[selected_user_id]} ({selected_user_id})")
+        return selected_user_id
+
     print("Multiple Users Detected! Select a user:")
     for i, (user_id, username) in enumerate(usernames.items(), start=1):
         print(f"{i}. {username} ({user_id})")
