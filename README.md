@@ -1,72 +1,34 @@
 # Non-Steam Game Adder
 
-A python script to add non-steam games to your Steam library with artwork from steamgriddb
+A python script to add non-steam games to your Steam library with artwork from steamgriddb.
 
-## Features
-- Add non-Steam games to Steam.
-- Fetch game artwork (grid, hero, logo, icon) from SteamGridDB.
-- Works on Linux and Windows.
+Fork to run on the steamdeck.
 
 ## Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Cart1416/Add-Non-Steam-CLI.git
-   cd Add-Non-Steam-CLI
+First clone the repo.
+```console
+$ git clone https://github.com/Cart1416/Add-Non-Steam-CLI.git
+$ cd Add-Non-Steam-CLI
+```
 
-2. Install dependencies:
-
-pip install -r requirements.txt
-
-
+Then install the python stuff.
+```console
+$ python -m venv venv
+$ . ./venv/bin/activate
+$ pip install -r requirements.txt
+```
 
 ## Usage
 
-CLI
-
-Run the script interactively:
-
-python main.py
-
-
-
-Module
-
-Use the script in your own projects:
-
-make sure main.py is renamed to something like module.py and in the same directory
-
-``` python
-from module import NonSteamGameAdder
-
-adder = NonSteamGameAdder(
-    steamgriddb_api_key="your_api_key_here"
-)
-adder.fetch_steamgriddb_image(self, game_id, image_type)
-adder.get_local_steam_usernames()
-adder.add_non_steam_game(
-    game_exe_path="/path/to/game",
-    game_name="Game Name",
-    user_id="12345678",
-    launch_options=""
-)
+```bash
+$ python main.py
 ```
 
-Dependencies
-
-```
-Python 3.7+
-
-requests
-
-pillow
-
-vdf
-```
-
-
-Notes
+## Notes
 
 Get a SteamGridDB API key from SteamGridDB for artwork.
 
-Ensure Steam is installed in the default directory or update the paths in the script.
+https://www.steamgriddb.com/
+
+It's very easy, you can just log in with steam, and then find the api key in the preferences. 
