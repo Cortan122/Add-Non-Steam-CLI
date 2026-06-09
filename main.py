@@ -173,8 +173,8 @@ class NonSteamGameAdder:
 
             new_entry = {
                 "appid": app_id,
-                "appname": game_name,
-                "exe": f'"{exe_path}"',
+                "AppName": game_name,
+                "Exe": f'"{exe_path}"',
                 "StartDir": f'"{game_path}"',
                 "LaunchOptions": launch_options,
                 "IsHidden": 0,
