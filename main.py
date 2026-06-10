@@ -11,6 +11,7 @@ import platform
 
 import sys
 import os
+from pprint import pprint
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -251,9 +252,20 @@ def select_steam_user():
             pass
         print("Invalid selection. Please enter a valid number.")
 
+def print_shortcuts_db():
+    shortcuts_file = os.path.join(steam_user_data_path, user_id, 'config', 'shortcuts.vdf')
+    with open(shortcuts_file, 'rb') as f:
+        shortcuts = vdf.binary_load(f)
+        pprint(shortcuts)
+
 def main():
     """Main function to add a non-Steam game."""
+
     try:
+        if len(sys.argv) > 1 and sys.argv[1] == "--print":
+            print_shortcuts_db()
+            return
+
         # Collect game details
         if len(sys.argv) > 1:
             game_exe_path = sys.argv[1]
