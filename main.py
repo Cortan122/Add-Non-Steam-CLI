@@ -278,6 +278,7 @@ def main():
         else:
             game_name = input("Enter the name of the game\n> ").strip()
         # launch_options = input("Enter any launch options or press Enter to skip\n> ").strip()
+        launch_options = ""
 
         # Validate the game path
         if not os.path.exists(game_exe_path):
