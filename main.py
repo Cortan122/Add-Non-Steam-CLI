@@ -253,6 +253,7 @@ def select_steam_user():
         print("Invalid selection. Please enter a valid number.")
 
 def print_shortcuts_db():
+    user_id = select_steam_user()
     shortcuts_file = os.path.join(steam_user_data_path, user_id, 'config', 'shortcuts.vdf')
     with open(shortcuts_file, 'rb') as f:
         shortcuts = vdf.binary_load(f)
